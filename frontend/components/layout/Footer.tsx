@@ -50,7 +50,7 @@ export function Footer() {
           </h4>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-accent">
+              <a href="https://www.instagram.com/juli_danilchenko/" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                 Instagram
               </a>
             </li>
