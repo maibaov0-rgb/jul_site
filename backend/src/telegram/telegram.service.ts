@@ -28,14 +28,14 @@ export class TelegramService {
     const text = [
       `🛍️ *Нове замовлення №${order.id}*`,
       ``,
-      `👤 ${order.customerName}`,
-      `📞 ${order.phone}`,
-      `📦 ${order.deliveryInfo}`,
+      `Клієнт: ${order.customerName}`,
+      `Телефон: ${order.phone}`,
+      `Доставка: ${order.deliveryInfo}`,
       ``,
       `*Товари:*`,
       productLines,
       ``,
-      `💰 *Разом: ${order.totalPrice} грн*`,
+      `*Разом: ${order.totalPrice} грн*`,
     ].join('\n');
 
     try {
