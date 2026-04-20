@@ -103,7 +103,7 @@ export default function CheckoutPage() {
             </p>
             <div className="mt-3 rounded-xl bg-background px-4 py-3">
               <p className="font-mono text-sm font-medium">UA12 3456 7890 1234 5678 9012 3456</p>
-              <p className="mt-1 text-xs text-muted">Данільченко Юлія Іванівна</p>
+              <p className="mt-1 text-xs text-muted">Данільченко Юлія</p>
             </div>
             <p className="mt-3 text-xs text-muted">
               У призначенні платежу вкажіть ваше ім'я та номер замовлення.
