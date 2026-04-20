@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   // Set up scroll animations for the dynamic "dissolve" effect
   const { scrollYProgress } = useScroll({
@@ -12,14 +13,14 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.8, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 0.6], [0, 20]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto px-4 py-8 sm:px-8 sm:py-16 md:py-24"
+      className="relative mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-8 sm:py-12 md:py-20 lg:py-24"
     >
       <motion.div 
         style={{ opacity, scale, y }}
@@ -28,13 +29,13 @@ export function Hero() {
         
         {/* Left side: Expert Photo */}
         <div className="w-[43%] md:w-1/2 relative shrink-0 overflow-hidden">
-          <img 
+          <Image 
             src="/expert.png" 
             alt="Юлія Данільченко" 
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="%23f3f4f6"><rect width="100%" height="100%"/><text x="50%" y="50%" fill="%239ca3af" font-family="system-ui" font-size="20" text-anchor="middle" dy=".3em">Фото експерта</text></svg>';
-            }}
+            fill
+            priority
+            sizes="(max-width: 640px) 43vw, 50vw"
+            className="object-cover object-center"
           />
         </div>
 

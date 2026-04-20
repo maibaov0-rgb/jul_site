@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { LinkButton } from "@/components/ui/Button";
-import Link from "next/link";
+import Image from "next/image";
 
 const PLACEHOLDER_POSTS = [
   {
@@ -35,42 +33,22 @@ export function BlogPreview() {
   return (
     <section className="mx-auto w-full max-w-6xl px-5 pt-8 pb-16 sm:px-8 sm:pt-16 sm:pb-24">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="flex flex-col gap-4 text-center sm:text-left"
-      >
-        <div>
-          <span className="text-xs uppercase tracking-[0.3em] text-muted">
-            Корисне
-          </span>
-          <h2 className="mt-2 font-serif text-3xl leading-tight sm:text-4xl md:text-5xl">
-            Блог експерта
-          </h2>
-        </div>
-      </motion.div>
-
+// ... (omitted search)
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PLACEHOLDER_POSTS.map((post, index) => (
           <motion.div
             key={post.id}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{
-              duration: 0.55,
-              delay: index * 0.1,
-              ease: "easeOut",
-            }}
+// ... (omitted search)
             className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-background transition-shadow hover:shadow-xl hover:shadow-foreground/5"
           >
             <Link href="/blog" className="flex flex-col h-full">
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                <img 
+                <Image 
                   src={post.image} 
                   alt={post.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">

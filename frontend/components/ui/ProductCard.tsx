@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import type { ApiProduct } from "@/lib/api";
 import { useCartStore } from "@/lib/store";
 
@@ -33,17 +33,19 @@ export function ProductCard({ product }: { product: ApiProduct }) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/5">
-      {/* ... (image area) */}
       <Link
         href={`/product/${product.slug}`}
         className="relative block aspect-[3/4] overflow-hidden bg-gradient-to-br from-accent/20 via-background to-gold/15"
         aria-label={product.name}
       >
         {product.imageUrls?.[0] ? (
-          <img
+          <Image
             src={product.imageUrls[0]}
             alt={product.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            priority={false}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -52,7 +54,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
             </span>
           </div>
         )}
-        <span className="absolute left-2.5 top-2.5 rounded-full bg-background/85 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted backdrop-blur-sm sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-xs">
+        <span className="absolute left-2.5 top-2.5 z-10 rounded-full bg-background/85 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted backdrop-blur-sm sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-xs">
           {categoryLabels[product.category] ?? product.category}
         </span>
       </Link>
