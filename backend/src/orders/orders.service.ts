@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
+import { TelegramService } from '../telegram/telegram.service.js';
 import { CreateOrderDto } from './dto/create-order.dto.js';
 
 @Injectable()
 export class OrdersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly telegram: TelegramService,
+  ) {}
 
   async create(dto: CreateOrderDto) {
-    return this.prisma.order.create({
+    const order = await this.prisma.order.create({
       data: {
         customerName: dto.customerName,
         phone: dto.phone,
@@ -17,6 +21,14 @@ export class OrdersService {
         status: 'new',
       },
     });
+
+    // Надсилаємо сповіщення
+    await this.telegram.sendOrderNotification({
+      ...order,
+      products: dto.products as any,
+    });
+
+    return order;
   }
 
   findAll() {
