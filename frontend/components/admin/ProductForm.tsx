@@ -8,8 +8,9 @@ const MAX_IMAGES = 6;
 
 const categories = [
   { value: "shampoo", label: "Шампунь" },
+  { value: "conditioner", label: "Кондиціонер" },
   { value: "mask", label: "Маска" },
-  { value: "gel", label: "Гель" },
+  { value: "leave-in", label: "Незмивний догляд термозахист" },
   { value: "other", label: "Інше" },
 ];
 
@@ -21,22 +22,10 @@ const subtypesByCategory: Record<string, { value: string; label: string }[]> = {
     { value: "sensitive-scalp", label: "Чутлива шкіра" },
     { value: "peeling", label: "Пілінг" },
   ],
-  mask: [
-    { value: "moisturizing", label: "Зволоження" },
-    { value: "repair", label: "Відновлення" },
-    { value: "color-protect", label: "Захист кольору" },
-    { value: "anti-frizz", label: "Антизаламування" },
-  ],
-  gel: [
-    { value: "strong-hold", label: "Сильна фіксація" },
-    { value: "light-hold", label: "Легка фіксація" },
-    { value: "curl", label: "Для кучерів" },
-  ],
-  other: [
-    { value: "serum", label: "Сироватка" },
-    { value: "oil", label: "Олія" },
-    { value: "spray", label: "Спрей" },
-    { value: "conditioner", label: "Кондиціонер" },
+  "leave-in": [
+    { value: "heat-spray", label: "Спреї термозахисти" },
+    { value: "leave-in-cream", label: "Незмивні креми" },
+    { value: "fluid-elixir", label: "Флюїди еліксири" },
   ],
 };
 

@@ -8,8 +8,9 @@ import { ProductCard } from "@/components/ui/ProductCard";
 const categories = [
   { value: "", label: "Всі" },
   { value: "shampoo", label: "Шампуні" },
+  { value: "conditioner", label: "Кондиціонери" },
   { value: "mask", label: "Маски" },
-  { value: "gel", label: "Гелі" },
+  { value: "leave-in", label: "Незмивний догляд" },
   { value: "other", label: "Інше" },
 ];
 
@@ -21,22 +22,10 @@ const subtypes: Record<string, { value: string; label: string }[]> = {
     { value: "sensitive-scalp", label: "Чутлива шкіра" },
     { value: "peeling", label: "Пілінг" },
   ],
-  mask: [
-    { value: "moisturizing", label: "Зволоження" },
-    { value: "repair", label: "Відновлення" },
-    { value: "color-protect", label: "Захист кольору" },
-    { value: "anti-frizz", label: "Антизаламування" },
-  ],
-  gel: [
-    { value: "strong-hold", label: "Сильна фіксація" },
-    { value: "light-hold", label: "Легка фіксація" },
-    { value: "curl", label: "Для кучерів" },
-  ],
-  other: [
-    { value: "serum", label: "Сироватка" },
-    { value: "oil", label: "Олія" },
-    { value: "spray", label: "Спрей" },
-    { value: "conditioner", label: "Кондиціонер" },
+  "leave-in": [
+    { value: "heat-spray", label: "Спреї термозахисти" },
+    { value: "leave-in-cream", label: "Незмивні креми" },
+    { value: "fluid-elixir", label: "Флюїди еліксири" },
   ],
 };
 
