@@ -142,6 +142,12 @@ export default function ProductPage() {
             {product.name}
           </h1>
 
+          {product.volume && (
+            <div className="mt-2 text-sm uppercase tracking-wide text-muted">
+              Об'єм: {product.volume}
+            </div>
+          )}
+
           <div className="mt-5 font-serif text-4xl text-foreground">
             {formatPrice(product.price)}
           </div>

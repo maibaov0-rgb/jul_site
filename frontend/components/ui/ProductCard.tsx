@@ -65,14 +65,21 @@ export function ProductCard({ product }: { product: ApiProduct }) {
           </h3>
         </Link>
 
-        <p className="hidden line-clamp-2 text-sm text-muted sm:block">
+        <p className="line-clamp-2 text-sm text-muted">
           {product.description}
         </p>
 
         <div className="mt-auto flex items-center justify-between gap-2 pt-2 sm:pt-3">
-          <span className="font-serif text-lg sm:text-2xl">
-            {formatPrice(product.price)}
-          </span>
+          <div className="flex flex-col">
+            {product.volume && (
+              <span className="text-[10px] text-muted uppercase tracking-wide">
+                {product.volume}
+              </span>
+            )}
+            <span className="font-serif text-lg sm:text-2xl">
+              {formatPrice(product.price)}
+            </span>
+          </div>
           <button
             type="button"
             onClick={handleAddToCart}

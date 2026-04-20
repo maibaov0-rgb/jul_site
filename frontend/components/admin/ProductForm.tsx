@@ -45,6 +45,7 @@ export function ProductForm({ product }: Props) {
     description: product?.description ?? "",
     price: product?.price?.toString() ?? "",
     category: product?.category ?? "shampoo",
+    volume: product?.volume ?? "",
     featured: product?.featured ?? false,
     imageUrls: product?.imageUrls ?? [] as string[],
   });
@@ -86,6 +87,7 @@ export function ProductForm({ product }: Props) {
       description: form.description,
       price: parseFloat(form.price),
       category: form.category,
+      volume: form.volume,
       featured: form.featured,
       imageUrls: form.imageUrls,
     };
@@ -203,6 +205,16 @@ export function ProductForm({ product }: Props) {
             required
             className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm focus:border-foreground/40 focus:outline-none"
             placeholder="680"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">Об'єм (напр. 500 мл)</label>
+          <input
+            value={form.volume}
+            onChange={(e) => setForm((f) => ({ ...f, volume: e.target.value }))}
+            className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm focus:border-foreground/40 focus:outline-none"
+            placeholder="500 мл"
           />
         </div>
       </div>
