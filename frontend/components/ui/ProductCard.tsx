@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { ApiProduct } from "@/lib/api";
 import { useCartStore } from "@/lib/store";
 
