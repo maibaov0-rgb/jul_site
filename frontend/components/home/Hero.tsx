@@ -20,11 +20,11 @@ export function Hero() {
   return (
     <section 
       ref={containerRef}
-      className="relative mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-8 sm:py-12 md:py-20 lg:py-24"
+      className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:px-8 sm:py-12 md:py-20 lg:py-24"
     >
       <motion.div 
         style={{ opacity, scale, y }}
-        className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50 min-h-[300px] sm:min-h-0"
+        className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50 min-h-[320px] md:min-h-[600px]"
       >
         
         {/* Left side: Expert Photo */}
