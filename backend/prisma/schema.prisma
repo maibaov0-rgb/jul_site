@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  category    String
+  imageUrls   String[]
+  featured    Boolean  @default(false)
+  slug        String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id           Int      @id @default(autoincrement())
+  customerName String
+  phone        String
+  deliveryInfo String
+  products     Json
+  totalPrice   Float
+  status       String   @default("new")
+  createdAt    DateTime @default(now())
+}
