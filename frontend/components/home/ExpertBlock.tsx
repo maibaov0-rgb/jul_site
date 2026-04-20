@@ -26,11 +26,11 @@ export function ExpertBlock() {
           className="relative order-first md:order-none"
         >
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] border border-border/60 bg-gradient-to-br from-gold/25 via-surface to-accent/25 shadow-xl md:max-w-none">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-serif text-[6rem] italic leading-none text-foreground/20 sm:text-[8rem]">
-                ЮД
-              </span>
-            </div>
+            <img 
+              src="/expert.png" 
+              alt="Юлія Данільченко" 
+              className="h-full w-full object-cover object-center"
+            />
           </div>
 
           {/* Quote card — shown on sm+, positioned outside on md+ */}

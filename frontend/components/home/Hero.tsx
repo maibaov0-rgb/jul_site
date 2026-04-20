@@ -23,15 +23,15 @@ export function Hero() {
     >
       <motion.div 
         style={{ opacity, scale, y }}
-        className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50"
+        className="relative flex flex-col md:flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50"
       >
         
         {/* Left side: Expert Photo */}
-        <div className="w-[45%] md:w-1/2 relative shrink-0">
+        <div className="w-full md:w-1/2 relative aspect-square md:aspect-auto shrink-0 overflow-hidden">
           <img 
             src="/expert.png" 
             alt="Юлія Данільченко" 
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-center"
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="%23f3f4f6"><rect width="100%" height="100%"/><text x="50%" y="50%" fill="%239ca3af" font-family="system-ui" font-size="20" text-anchor="middle" dy=".3em">Фото експерта</text></svg>';
             }}
@@ -39,7 +39,7 @@ export function Hero() {
         </div>
 
         {/* Right side: Text details */}
-        <div className="w-[55%] md:w-1/2 p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-surface relative z-10 shrink-0">
+        <div className="w-full md:w-1/2 p-7 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-center bg-surface relative z-10 shrink-0 text-center md:text-left items-center md:items-start">
           <h2 className="mb-2 text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-widest text-muted">
             Ваш експерт
           </h2>
