@@ -54,12 +54,13 @@ export function ExpertBlock() {
             Юлія Данільченко
           </h2>
           <p className="mt-0.5 text-[9px] sm:text-sm uppercase tracking-wider text-accent font-medium">
-            Косметолог · Трихолог
+            Перукар-колорист
           </p>
 
           <div className="mt-3 sm:mt-8 space-y-2 sm:space-y-3 text-[10px] sm:text-base leading-relaxed text-muted">
             <p>
-              Понад десять років допомагаю жінкам повертати здоров&apos;я волосся. 
+              Понад десять років допомагаю жінкам досягати ідеального кольору та
+              здоров&apos;я волосся.
             </p>
             <p className="hidden md:block">
               Кожен засіб у цьому каталозі — особисто протестований, з

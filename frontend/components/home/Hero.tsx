@@ -49,11 +49,11 @@ export function Hero() {
           </h1>
           
           <p className="mt-1 md:mt-3 text-[10px] sm:text-base md:text-lg font-medium text-accent">
-            Косметолог · Трихолог
+            Перукар-колорист
           </p>
 
           <p className="mt-3 md:mt-8 text-[11px] sm:text-sm md:text-base leading-relaxed text-muted max-w-md">
-            Професійна косметика та індивідуальні консультації. Обирайте найкраще для свого волосся та шкіри разом з експертом.
+            Професійний догляд, фарбування та індивідуальні консультації. Обирайте найкраще для свого волосся разом з експертом.
           </p>
 
           <div className="mt-4 md:mt-10 flex flex-col xl:flex-row gap-2 sm:gap-4 w-full xl:w-auto">
