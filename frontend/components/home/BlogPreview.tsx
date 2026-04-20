@@ -1,5 +1,8 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { LinkButton } from "@/components/ui/Button";
+import Link from "next/link";
 import Image from "next/image";
 
 const PLACEHOLDER_POSTS = [
@@ -33,12 +36,34 @@ export function BlogPreview() {
   return (
     <section className="mx-auto w-full max-w-6xl px-5 pt-8 pb-16 sm:px-8 sm:pt-16 sm:pb-24">
       <motion.div
-// ... (omitted search)
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="flex flex-col gap-4 text-center sm:text-left"
+      >
+        <div>
+          <span className="text-xs uppercase tracking-[0.3em] text-muted">
+            Корисне
+          </span>
+          <h2 className="mt-2 font-serif text-3xl leading-tight sm:text-4xl md:text-5xl">
+            Блог експерта
+          </h2>
+        </div>
+      </motion.div>
+
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PLACEHOLDER_POSTS.map((post, index) => (
           <motion.div
             key={post.id}
-// ... (omitted search)
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{
+              duration: 0.55,
+              delay: index * 0.1,
+              ease: "easeOut",
+            }}
             className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-background transition-shadow hover:shadow-xl hover:shadow-foreground/5"
           >
             <Link href="/blog" className="flex flex-col h-full">
