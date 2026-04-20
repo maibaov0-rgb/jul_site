@@ -12,18 +12,19 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6], [1, 0.8, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 0.6], [0, 20]);
 
   return (
-    <motion.section 
+    <section 
       ref={containerRef}
-      style={{ opacity, scale, y }}
       className="relative w-full max-w-6xl mx-auto px-4 py-8 sm:px-8 sm:py-16 md:py-24"
     >
-      {/* Cohesive Block with sophisticated shadow */}
-      <div className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50">
+      <motion.div 
+        style={{ opacity, scale, y }}
+        className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50"
+      >
         
         {/* Left side: Expert Photo */}
         <div className="w-[45%] md:w-1/2 relative shrink-0">
@@ -72,7 +73,7 @@ export function Hero() {
             </a>
           </div>
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   );
 }
