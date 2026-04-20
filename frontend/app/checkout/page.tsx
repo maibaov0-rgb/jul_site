@@ -54,6 +54,7 @@ export default function CheckoutPage() {
       });
       setOrderId(order.id);
       clearCart();
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setStep("success");
     } catch {
       setError("Помилка при оформленні замовлення. Спробуйте ще раз.");
