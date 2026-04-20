@@ -35,6 +35,7 @@ services:
     restart: always
     environment:
       NEXT_PUBLIC_API_URL: http://173.212.192.65:4000
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     ports:
       - "3000:3000"
     depends_on:
