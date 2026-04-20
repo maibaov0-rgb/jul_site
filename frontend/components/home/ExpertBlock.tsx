@@ -15,7 +15,7 @@ export function ExpertBlock() {
       id="expert"
       className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-24"
     >
-      <div className="grid items-center gap-4 sm:gap-14 grid-cols-2">
+      <div className="grid items-center gap-3 sm:gap-14 grid-cols-[1fr_1.4fr] sm:grid-cols-2">
         {/* Photo — left for both desktop and mobile */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ export function ExpertBlock() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative"
         >
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl sm:rounded-[2rem] border border-border/60 bg-gradient-to-br from-accent/20 via-surface to-accent/10 shadow-xl">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl sm:rounded-[2rem] border border-border/60 bg-gradient-to-br from-accent/20 via-surface to-accent/10 shadow-xl">
             <img 
               src="/expert.png" 
               alt="Юлія Данільченко" 
@@ -47,43 +47,42 @@ export function ExpertBlock() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
         >
-          <span className="text-xs uppercase tracking-[0.3em] text-muted">
+          <span className="text-[8px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted">
             Ваш експерт
           </span>
-          <h2 className="mt-2 font-serif text-xl sm:text-4xl md:text-5xl leading-tight">
+          <h2 className="mt-1 font-serif text-lg sm:text-4xl md:text-5xl leading-tight">
             Юлія Данільченко
           </h2>
-          <p className="mt-1 text-[10px] sm:text-sm uppercase tracking-wider text-accent">
+          <p className="mt-0.5 text-[9px] sm:text-sm uppercase tracking-wider text-accent font-medium">
             Косметолог · Трихолог
           </p>
 
-          <div className="mt-4 sm:mt-8 space-y-2 sm:space-y-3 text-[11px] sm:text-base leading-relaxed text-muted">
+          <div className="mt-3 sm:mt-8 space-y-2 sm:space-y-3 text-[10px] sm:text-base leading-relaxed text-muted">
             <p>
-              Понад десять років допомагаю жінкам повертати здоров&apos;я та
-              красу волосся.
+              Понад десять років допомагаю жінкам повертати здоров&apos;я волосся. 
             </p>
-            <p className="hidden sm:block">
+            <p className="hidden md:block">
               Кожен засіб у цьому каталозі — особисто протестований, з
-              розумінням того, як саме він працює на різних типах волосся.
+              розумінням того, як він працює.
             </p>
           </div>
 
           {/* Stats */}
-          <dl className="mt-6 grid grid-cols-3 gap-1 sm:gap-4 border-y border-border/60 py-3 sm:mt-10 sm:py-6">
+          <dl className="mt-4 grid grid-cols-3 gap-1 sm:gap-4 border-y border-border/60 py-3 sm:mt-10 sm:py-6">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <dt className="font-serif text-sm sm:text-3xl text-foreground">
+                <dt className="font-serif text-xs sm:text-3xl text-foreground">
                   {stat.value}
                 </dt>
-                <dd className="mt-0.5 text-[8px] sm:text-xs uppercase tracking-wider text-muted">
+                <dd className="mt-0.5 text-[7px] sm:text-xs uppercase tracking-wider text-muted leading-none">
                   {stat.label}
                 </dd>
               </div>
             ))}
           </dl>
 
-          <div className="mt-6">
-            <LinkButton href="https://t.me/MaibaOV" variant="primary" className="w-full sm:w-auto text-[10px] sm:text-sm py-2 sm:py-3.5">
+          <div className="mt-4 sm:mt-8">
+            <LinkButton href="https://t.me/MaibaOV" variant="primary" className="w-full sm:w-auto text-[9px] sm:text-sm py-2 sm:py-3.5">
               Консультація
             </LinkButton>
           </div>

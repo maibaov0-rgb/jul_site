@@ -1,6 +1,8 @@
 import { Hero } from "@/components/home/Hero";
-import { BlogPreview } from "@/components/home/BlogPreview";
+import { ExpertBlock } from "@/components/home/ExpertBlock";
+import { BrandPhilosophy } from "@/components/home/BrandPhilosophy";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
+import { BlogPreview } from "@/components/home/BlogPreview";
 
 export default function Home() {
   return (
@@ -10,11 +12,17 @@ export default function Home() {
       </div>
 
       <div className="bg-background">
-        <BlogPreview />
+        <ExpertBlock />
       </div>
+
+      <BrandPhilosophy />
 
       <div className="bg-background">
         <FeaturedProducts />
+      </div>
+
+      <div className="bg-background">
+        <BlogPreview />
       </div>
     </>
   );
