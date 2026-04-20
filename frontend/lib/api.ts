@@ -34,7 +34,7 @@ export type ApiProduct = {
 };
 
 export async function getProducts(): Promise<ApiProduct[]> {
-  const res = await fetch(`${API_URL}/products`);
+  const res = await fetch(`${API_URL}/products`, { cache: 'no-store' });
   return res.json();
 }
 

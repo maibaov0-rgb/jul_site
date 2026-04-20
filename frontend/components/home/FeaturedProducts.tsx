@@ -13,7 +13,7 @@ export function FeaturedProducts() {
     getProducts()
       .then((all) => {
         const featured = all.filter((p) => p.featured);
-        setProducts(featured.slice(0, 4));
+        setProducts(featured.slice(0, 8));
       })
       .catch(() => setProducts([]));
   }, []);
