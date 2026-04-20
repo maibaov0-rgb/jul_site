@@ -32,8 +32,8 @@ export function ProductCard({ product }: { product: ApiProduct }) {
   }
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/5">
-      {/* Image area */}
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/5">
+      {/* ... (image area) */}
       <Link
         href={`/product/${product.slug}`}
         className="relative block aspect-[3/4] overflow-hidden bg-gradient-to-br from-accent/20 via-background to-gold/15"
@@ -60,13 +60,13 @@ export function ProductCard({ product }: { product: ApiProduct }) {
       {/* Info */}
       <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
         <Link href={`/product/${product.slug}`}>
-          <h3 className="font-serif text-base leading-tight transition-colors group-hover:text-accent sm:text-xl">
+          <h3 className="font-serif text-base leading-tight transition-colors group-hover:text-accent sm:text-xl line-clamp-2 min-h-[2.5rem] sm:min-h-[3.5rem]">
             {product.name}
           </h3>
         </Link>
 
-        <p className="line-clamp-2 text-sm text-muted">
-          {product.description}
+        <p className="line-clamp-2 text-sm text-muted min-h-[2.5rem]">
+          {product.description || "\u00A0"}
         </p>
 
         <div className="mt-auto flex items-center justify-between gap-2 pt-2 sm:pt-3">
