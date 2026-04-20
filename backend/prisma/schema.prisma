@@ -15,6 +15,7 @@ model Product {
   category    String
   volume      String?
   imageUrls   String[]
+  tags        String[]
   featured    Boolean  @default(false)
   slug        String   @unique
   createdAt   DateTime @default(now())

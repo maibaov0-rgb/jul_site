@@ -5,6 +5,7 @@ export class CreateProductDto {
   category: string;
   volume?: string;
   imageUrls: string[];
+  tags?: string[];
   featured?: boolean;
   slug: string;
 }

@@ -13,6 +13,33 @@ const categories = [
   { value: "other", label: "Інше" },
 ];
 
+const subtypesByCategory: Record<string, { value: string; label: string }[]> = {
+  shampoo: [
+    { value: "normal-scalp", label: "Нормальна шкіра" },
+    { value: "dry-scalp", label: "Суха шкіра" },
+    { value: "oily-scalp", label: "Жирна шкіра" },
+    { value: "sensitive-scalp", label: "Чутлива шкіра" },
+    { value: "peeling", label: "Пілінг" },
+  ],
+  mask: [
+    { value: "moisturizing", label: "Зволоження" },
+    { value: "repair", label: "Відновлення" },
+    { value: "color-protect", label: "Захист кольору" },
+    { value: "anti-frizz", label: "Антизаламування" },
+  ],
+  gel: [
+    { value: "strong-hold", label: "Сильна фіксація" },
+    { value: "light-hold", label: "Легка фіксація" },
+    { value: "curl", label: "Для кучерів" },
+  ],
+  other: [
+    { value: "serum", label: "Сироватка" },
+    { value: "oil", label: "Олія" },
+    { value: "spray", label: "Спрей" },
+    { value: "conditioner", label: "Кондиціонер" },
+  ],
+};
+
 function toSlug(str: string) {
   return str
     .toLowerCase()
@@ -50,6 +77,7 @@ export function ProductForm({ product }: Props) {
     volume: product?.volume ?? "",
     featured: product?.featured ?? false,
     imageUrls: product?.imageUrls ?? [] as string[],
+    tags: product?.tags ?? [] as string[],
   });
 
   const [uploading, setUploading] = useState(false);
@@ -96,6 +124,7 @@ export function ProductForm({ product }: Props) {
       volume: form.volume,
       featured: form.featured,
       imageUrls: form.imageUrls,
+      tags: form.tags,
     };
 
     try {
@@ -243,6 +272,42 @@ export function ProductForm({ product }: Props) {
           />
         </div>
       </div>
+
+      {/* Subtypes / Tags */}
+      {subtypesByCategory[form.category] && (
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Підтипи
+            <span className="ml-2 text-xs font-normal text-muted">можна обрати кілька</span>
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {subtypesByCategory[form.category].map((sub) => {
+              const active = form.tags.includes(sub.value);
+              return (
+                <button
+                  key={sub.value}
+                  type="button"
+                  onClick={() =>
+                    setForm((f) => ({
+                      ...f,
+                      tags: active
+                        ? f.tags.filter((t) => t !== sub.value)
+                        : [...f.tags, sub.value],
+                    }))
+                  }
+                  className={`rounded-full px-3.5 py-1.5 text-xs transition-all ${
+                    active
+                      ? "bg-accent/15 text-accent border border-accent/40"
+                      : "border border-border/60 text-muted hover:border-foreground/30 hover:text-foreground"
+                  }`}
+                >
+                  {sub.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Description */}
       <div>
