@@ -4,6 +4,8 @@ import { useState, useRef, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { adminUploadImage, adminCreateProduct, adminUpdateProduct, type ApiProduct } from "@/lib/api";
 
+const MAX_IMAGES = 6;
+
 const categories = [
   { value: "shampoo", label: "Шампунь" },
   { value: "mask", label: "Маска" },
@@ -32,7 +34,7 @@ function getAdminPassword() {
 
 type Props = {
   product?: ApiProduct;
-  password?: string; // made optional
+  password?: string;
 };
 
 export function ProductForm({ product }: Props) {
@@ -53,7 +55,6 @@ export function ProductForm({ product }: Props) {
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [preview, setPreview] = useState<string | null>(form.imageUrls[0] ?? null);
 
   function handleNameChange(name: string) {
     setForm((f) => ({ ...f, name, slug: f.slug || toSlug(name) }));
@@ -62,18 +63,23 @@ export function ProductForm({ product }: Props) {
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (form.imageUrls.length >= MAX_IMAGES) return;
 
-    setPreview(URL.createObjectURL(file));
     setUploading(true);
+    setError("");
     try {
-      const currentPassword = getAdminPassword();
-      const { url } = await adminUploadImage(currentPassword, file);
-      setForm((f) => ({ ...f, imageUrls: [url] }));
+      const { url } = await adminUploadImage(getAdminPassword(), file);
+      setForm((f) => ({ ...f, imageUrls: [...f.imageUrls, url] }));
     } catch {
       setError("Помилка завантаження фото");
     } finally {
       setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
     }
+  }
+
+  function removeImage(index: number) {
+    setForm((f) => ({ ...f, imageUrls: f.imageUrls.filter((_, i) => i !== index) }));
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -107,28 +113,55 @@ export function ProductForm({ product }: Props) {
     }
   }
 
+  const canAddMore = form.imageUrls.length < MAX_IMAGES;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       {/* Photo upload */}
       <div>
-        <label className="block text-sm font-medium mb-2">Фото товару</label>
+        <label className="block text-sm font-medium mb-2">
+          Фото товару
+          <span className="ml-2 text-xs font-normal text-muted">
+            {form.imageUrls.length}/{MAX_IMAGES}
+          </span>
+        </label>
+
+        {/* Thumbnails grid */}
+        {form.imageUrls.length > 0 && (
+          <div className="mb-3 flex flex-wrap gap-2">
+            {form.imageUrls.map((url, i) => (
+              <div key={url} className="relative h-20 w-20 overflow-hidden rounded-xl border border-border/60">
+                <img src={url} alt="" className="h-full w-full object-cover" />
+                <button
+                  type="button"
+                  onClick={() => removeImage(i)}
+                  className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-white text-xs hover:bg-black/80"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Add button */}
         <div
-          className="relative flex h-48 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-border/60 bg-background/60 transition-colors hover:border-foreground/30 hover:bg-background"
-          onClick={() => fileRef.current?.click()}
+          className={`relative flex h-20 cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-dashed transition-colors ${
+            canAddMore
+              ? "border-border/60 hover:border-foreground/30 hover:bg-background"
+              : "cursor-not-allowed border-border/30 opacity-40"
+          }`}
+          onClick={() => canAddMore && fileRef.current?.click()}
         >
-          {preview ? (
-            <img src={preview} alt="Прев'ю" className="h-full w-full object-cover" />
+          {uploading ? (
+            <span className="text-sm text-muted">Завантаження...</span>
           ) : (
             <>
-              <div className="text-3xl text-muted">📷</div>
-              <p className="mt-2 text-sm text-muted">Натисніть або перетягніть фото</p>
-              <p className="text-xs text-muted/60">PNG, JPG, WEBP до 10 МБ</p>
+              <span className="text-xl text-muted">📷</span>
+              <span className="text-sm text-muted">
+                {canAddMore ? "Додати фото" : "Досягнуто ліміт фото"}
+              </span>
             </>
-          )}
-          {uploading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-background/70 text-sm text-muted">
-              Завантаження...
-            </div>
           )}
         </div>
         <input
@@ -137,16 +170,8 @@ export function ProductForm({ product }: Props) {
           accept="image/*"
           className="hidden"
           onChange={handleFileChange}
+          disabled={!canAddMore}
         />
-        {preview && (
-          <button
-            type="button"
-            className="mt-2 text-xs text-muted underline hover:text-foreground"
-            onClick={() => { setPreview(null); setForm((f) => ({ ...f, imageUrls: [] })); }}
-          >
-            Видалити фото
-          </button>
-        )}
       </div>
 
       {/* Name */}
