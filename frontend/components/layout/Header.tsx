@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Logo } from "@/components/ui/Logo";
 import { useCartStore } from "@/lib/store";
 
@@ -33,12 +34,26 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 overflow-hidden transition-all duration-300 ${
           scrolled
             ? "border-b border-border/60 bg-header-bg/90 shadow-sm shadow-foreground/5 backdrop-blur-md"
             : "bg-header-bg/60 backdrop-blur-sm"
         }`}
       >
+        {/* One-time shimmer sweep on load */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          initial={false}
+        >
+          <motion.div
+            className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-accent/30 to-transparent skew-x-[-20deg]"
+            initial={{ x: "-100%" }}
+            animate={{ x: "400%" }}
+            transition={{ duration: 1.4, delay: 0.5, ease: "easeInOut" }}
+          />
+        </motion.div>
+
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
           {/* Logo */}
           <Logo />
