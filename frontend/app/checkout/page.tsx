@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useCartStore } from "@/lib/store";
 import { createOrder } from "@/lib/api";
+import { searchCities, getWarehouses, type NpCity, type NpWarehouse } from "@/lib/novaposhta";
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat("uk-UA", {
@@ -16,6 +17,187 @@ function formatPrice(price: number) {
 
 type Step = "form" | "success";
 
+// ── City autocomplete ──────────────────────────────────────────────────────
+
+function CityField({
+  onSelect,
+}: {
+  onSelect: (city: NpCity) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<NpCity[]>([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const skipSearchRef = useRef(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (skipSearchRef.current) { skipSearchRef.current = false; return; }
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (query.length < 2) { setResults([]); setOpen(false); return; }
+    debounceRef.current = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const cities = await searchCities(query);
+        setResults(cities);
+        setOpen(cities.length > 0);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+  }, [query]);
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  function handleSelect(city: NpCity) {
+    skipSearchRef.current = true;
+    setQuery(city.Present);
+    setOpen(false);
+    onSelect(city);
+  }
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <div className="relative">
+        <input
+          type="text"
+          required
+          placeholder="Почніть вводити місто…"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="h-12 w-full rounded-xl border border-border bg-background px-4 pr-10 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+        />
+        {loading && <div className="absolute right-3 top-1/2 -translate-y-1/2"><SpinnerIcon /></div>}
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 mt-1 w-full overflow-hidden rounded-xl border border-border/60 bg-background shadow-lg"
+          >
+            {results.map((city) => (
+              <li key={city.Ref}>
+                <button
+                  type="button"
+                  onMouseDown={() => handleSelect(city)}
+                  className="flex w-full flex-col px-4 py-2.5 text-left hover:bg-surface transition-colors"
+                >
+                  <span className="text-sm">{city.Present}</span>
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ── Warehouse autocomplete ─────────────────────────────────────────────────
+
+function WarehouseField({
+  cityRef,
+  onSelect,
+}: {
+  cityRef: string;
+  onSelect: (warehouse: NpWarehouse) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [warehouses, setWarehouses] = useState<NpWarehouse[]>([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!cityRef) return;
+    setQuery("");
+    setWarehouses([]);
+    setLoading(true);
+    getWarehouses(cityRef)
+      .then(setWarehouses)
+      .finally(() => setLoading(false));
+  }, [cityRef]);
+
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  const filtered = warehouses.filter((w) =>
+    w.Description.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  function handleSelect(w: NpWarehouse) {
+    setQuery(w.Description);
+    setOpen(false);
+    onSelect(w);
+  }
+
+  const disabled = !cityRef;
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <div className="relative">
+        <input
+          type="text"
+          required
+          disabled={disabled}
+          placeholder={disabled ? "Спочатку оберіть місто" : loading ? "Завантаження…" : "Пошук відділення…"}
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => { if (!disabled && warehouses.length > 0) setOpen(true); }}
+          className="h-12 w-full rounded-xl border border-border bg-background px-4 pr-10 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20 disabled:cursor-not-allowed disabled:opacity-50"
+        />
+        {loading && (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            <SpinnerIcon />
+          </div>
+        )}
+      </div>
+      <AnimatePresence>
+        {open && filtered.length > 0 && (
+          <motion.ul
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 mt-1 max-h-56 w-full overflow-y-auto rounded-xl border border-border/60 bg-background shadow-lg"
+          >
+            {filtered.map((w) => (
+              <li key={w.Ref}>
+                <button
+                  type="button"
+                  onMouseDown={() => handleSelect(w)}
+                  className="w-full px-4 py-2.5 text-left text-sm hover:bg-surface transition-colors"
+                >
+                  {w.Description}
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ── Main page ──────────────────────────────────────────────────────────────
+
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCartStore();
   const [step, setStep] = useState<Step>("form");
@@ -23,12 +205,9 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [form, setForm] = useState({
-    customerName: "",
-    phone: "",
-    city: "",
-    branch: "",
-  });
+  const [form, setForm] = useState({ customerName: "", phone: "" });
+  const [selectedCity, setSelectedCity] = useState<{ name: string; ref: string }>({ name: "", ref: "" });
+  const [selectedWarehouse, setSelectedWarehouse] = useState("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -36,10 +215,14 @@ export default function CheckoutPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!selectedCity.name || !selectedWarehouse) {
+      setError("Будь ласка, оберіть місто та відділення зі списку.");
+      return;
+    }
     setError("");
     setLoading(true);
     try {
-      const deliveryInfo = `${form.city}, відділення ${form.branch}`;
+      const deliveryInfo = `${selectedCity.name}, ${selectedWarehouse}`;
       const order = await createOrder({
         customerName: form.customerName,
         phone: form.phone,
@@ -89,9 +272,7 @@ export default function CheckoutPage() {
             <CheckIcon />
           </div>
           <h1 className="mt-6 font-serif text-4xl">Дякуємо за замовлення!</h1>
-          {orderId && (
-            <p className="mt-2 text-muted">Замовлення №{orderId}</p>
-          )}
+          {orderId && <p className="mt-2 text-muted">Замовлення №{orderId}</p>}
           <p className="mt-6 leading-relaxed text-muted">
             Юлія звʼяжеться з вами найближчим часом для підтвердження.
           </p>
@@ -135,7 +316,6 @@ export default function CheckoutPage() {
           <span>/</span>
           <span className="text-foreground">Оформлення</span>
         </nav>
-
         <h1 className="font-serif text-4xl sm:text-5xl">Оформлення</h1>
       </motion.div>
 
@@ -161,7 +341,7 @@ export default function CheckoutPage() {
                   type="text"
                   required
                   autoComplete="name"
-                  placeholder="Іванenko Іван Іванович"
+                  placeholder="Іваненко Іван Іванович"
                   value={form.customerName}
                   onChange={handleChange}
                   className="h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
@@ -190,33 +370,20 @@ export default function CheckoutPage() {
             <h2 className="font-serif text-xl">Доставка Новою Поштою</h2>
             <div className="mt-5 space-y-4">
               <div>
-                <label htmlFor="city" className="mb-1.5 block text-sm font-medium">
+                <label className="mb-1.5 block text-sm font-medium">
                   Місто <span className="text-red-500">*</span>
                 </label>
-                <input
-                  id="city"
-                  name="city"
-                  type="text"
-                  required
-                  placeholder="Київ"
-                  value={form.city}
-                  onChange={handleChange}
-                  className="h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+                <CityField
+                  onSelect={(city) => setSelectedCity({ name: city.Present, ref: city.Ref })}
                 />
               </div>
               <div>
-                <label htmlFor="branch" className="mb-1.5 block text-sm font-medium">
+                <label className="mb-1.5 block text-sm font-medium">
                   Відділення <span className="text-red-500">*</span>
                 </label>
-                <input
-                  id="branch"
-                  name="branch"
-                  type="text"
-                  required
-                  placeholder="№ 12"
-                  value={form.branch}
-                  onChange={handleChange}
-                  className="h-12 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors placeholder:text-muted/60 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20"
+                <WarehouseField
+                  cityRef={selectedCity.ref}
+                  onSelect={(w) => setSelectedWarehouse(w.Description)}
                 />
               </div>
             </div>
@@ -288,19 +455,16 @@ export default function CheckoutPage() {
 
 function CheckIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg className="animate-spin text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
     </svg>
   );
 }
