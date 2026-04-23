@@ -262,7 +262,7 @@ export default function CheckoutPage() {
 
   if (step === "success") {
     return (
-      <div className="mx-auto max-w-2xl px-5 py-24 text-center sm:px-8">
+      <div className="mx-auto max-w-2xl px-5 py-12 text-center sm:px-8 sm:py-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -271,7 +271,7 @@ export default function CheckoutPage() {
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-50 text-green-600">
             <CheckIcon />
           </div>
-          <h1 className="mt-6 text-4xl font-bold uppercase text-accent">Дякуємо за замовлення!</h1>
+          <h1 className="mt-6 text-2xl font-bold text-accent sm:text-3xl">Дякуємо за замовлення!</h1>
           {orderId && <p className="mt-2 text-muted">Замовлення №{orderId}</p>}
           <p className="mt-6 leading-relaxed text-muted">
             Юлія звʼяжеться з вами найближчим часом для підтвердження.
