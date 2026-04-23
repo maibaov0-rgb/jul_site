@@ -252,7 +252,7 @@ export default function CheckoutPage() {
         <p className="font-serif text-4xl">Кошик порожній</p>
         <Link
           href="/catalog"
-          className="mt-8 inline-flex h-12 items-center rounded-full bg-foreground px-8 text-sm text-background"
+          className="mt-8 inline-flex h-12 items-center rounded-full bg-accent px-8 text-sm text-white"
         >
           До каталогу
         </Link>
@@ -271,13 +271,23 @@ export default function CheckoutPage() {
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-50 text-green-600">
             <CheckIcon />
           </div>
-          <h1 className="mt-6 font-serif text-4xl">Дякуємо за замовлення!</h1>
+          <h1 className="mt-6 text-4xl font-bold uppercase text-accent">Дякуємо за замовлення!</h1>
           {orderId && <p className="mt-2 text-muted">Замовлення №{orderId}</p>}
           <p className="mt-6 leading-relaxed text-muted">
             Юлія звʼяжеться з вами найближчим часом для підтвердження.
           </p>
 
-          <div className="mt-10 rounded-2xl border border-border/60 bg-surface p-6 text-left">
+          <motion.div
+            className="mt-10 rounded-2xl border-2 border-accent bg-surface p-6 text-left"
+            animate={{
+              boxShadow: [
+                "0 0 0 0 rgba(131,99,157,0)",
+                "0 0 16px 4px rgba(131,99,157,0.35)",
+                "0 0 0 0 rgba(131,99,157,0)",
+              ],
+            }}
+            transition={{ duration: 1.4, repeat: 3, ease: "easeInOut", delay: 0.4 }}
+          >
             <h2 className="font-serif text-xl">Оплата</h2>
             <p className="mt-3 text-sm text-muted">
               Оплатіть замовлення після отримання або переведіть на IBAN:
@@ -289,11 +299,11 @@ export default function CheckoutPage() {
             <p className="mt-3 text-xs text-muted">
               У призначенні платежу вкажіть ваше ім'я та номер замовлення.
             </p>
-          </div>
+          </motion.div>
 
           <Link
             href="/"
-            className="mt-8 inline-flex h-12 items-center rounded-full bg-foreground px-8 text-sm text-background transition-colors hover:bg-foreground/90"
+            className="mt-8 inline-flex h-12 items-center rounded-full bg-accent px-8 text-sm text-white transition-colors hover:bg-accent/90"
           >
             На головну
           </Link>
@@ -398,7 +408,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={loading}
-            className="flex h-14 w-full items-center justify-center rounded-full bg-foreground text-sm font-medium text-background transition-all hover:bg-foreground/90 disabled:opacity-60"
+            className="flex h-14 w-full items-center justify-center rounded-full bg-accent text-sm font-medium text-white transition-all hover:bg-accent/90 disabled:opacity-60"
           >
             {loading ? "Оформлюємо…" : "Підтвердити замовлення"}
           </button>

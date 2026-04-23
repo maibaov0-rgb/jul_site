@@ -22,7 +22,7 @@ export default function CartPage() {
         <p className="mt-3 text-muted">Додайте товари з каталогу</p>
         <Link
           href="/catalog"
-          className="mt-8 inline-flex h-12 items-center rounded-full bg-foreground px-8 text-sm text-background transition-colors hover:bg-foreground/90"
+          className="mt-8 inline-flex h-12 items-center rounded-full bg-accent px-8 text-sm text-white transition-colors hover:bg-accent/90"
         >
           До каталогу
         </Link>
@@ -150,7 +150,7 @@ export default function CartPage() {
 
           <Link
             href="/checkout"
-            className="mt-6 flex h-12 w-full items-center justify-center rounded-full bg-foreground text-sm text-background transition-colors hover:bg-foreground/90"
+            className="mt-6 flex h-12 w-full items-center justify-center rounded-full bg-accent text-sm text-white transition-colors hover:bg-accent/90"
           >
             Оформити замовлення
           </Link>

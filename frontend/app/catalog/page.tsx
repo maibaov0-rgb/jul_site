@@ -95,7 +95,7 @@ export default function CatalogPage() {
               onClick={() => handleCategoryChange(cat.value)}
               className={`shrink-0 rounded-full px-4 py-2 text-sm transition-all ${
                 activeCategory === cat.value
-                  ? "bg-foreground text-background"
+                  ? "bg-accent text-white"
                   : "border border-border hover:border-foreground/40"
               }`}
             >

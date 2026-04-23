@@ -8,7 +8,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-foreground text-background hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98]",
+    "bg-accent text-white hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98]",
   outline:
     "border border-foreground/20 text-foreground hover:border-foreground/60 hover:bg-foreground/5",
   ghost: "text-foreground hover:bg-foreground/5",

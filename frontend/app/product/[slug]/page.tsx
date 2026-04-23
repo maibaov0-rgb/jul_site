@@ -165,7 +165,7 @@ export default function ProductPage() {
               className={`w-full rounded-full py-4 text-sm font-medium transition-all ${
                 added
                   ? "bg-green-600 text-white"
-                  : "bg-foreground text-background hover:bg-foreground/90"
+                  : "bg-accent text-white hover:bg-accent/90"
               }`}
             >
               {added ? "✓ Додано до кошика" : "В кошик"}

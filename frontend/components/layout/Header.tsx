@@ -168,7 +168,7 @@ export function Header() {
           <Link
             href="/cart"
             onClick={() => setOpen(false)}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground text-sm text-background"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-accent text-sm text-white"
           >
             <CartIcon className="text-background" />
             Кошик {cartCount > 0 ? `(${cartCount})` : ""}

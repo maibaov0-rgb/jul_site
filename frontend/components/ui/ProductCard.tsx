@@ -89,7 +89,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
             className={`min-h-[44px] rounded-full px-3 py-2 text-xs transition-all sm:px-4 sm:text-sm ${
               added
                 ? "bg-green-600 text-white"
-                : "bg-foreground text-background hover:scale-[1.03] hover:bg-foreground/90 active:scale-[0.97]"
+                : "bg-accent text-white hover:scale-[1.03] hover:bg-accent/90 active:scale-[0.97]"
             }`}
           >
             {added ? "✓ Додано" : "В кошик"}
