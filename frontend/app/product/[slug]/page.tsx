@@ -16,6 +16,11 @@ const categoryLabels: Record<string, string> = {
   emotions: "Емоції",
 };
 
+function formatVolume(volume: string) {
+  const t = volume.trim();
+  return /мл$/i.test(t) || /ml$/i.test(t) ? t.replace(/мл$/i, "мл").replace(/ml$/i, "мл") : `${t} мл`;
+}
+
 function formatPrice(price: number) {
   return new Intl.NumberFormat("uk-UA", {
     style: "currency",
@@ -145,13 +150,13 @@ export default function ProductPage() {
           </h1>
 
           {product.ph && (
-            <div className="mt-2 text-sm uppercase tracking-wide text-foreground/70">
+            <div className="mt-2 text-sm tracking-wide text-foreground/70">
               pH {product.ph}
             </div>
           )}
           {product.volume && (
-            <div className="mt-1 text-sm uppercase tracking-wide text-foreground/70">
-              Об'єм: {product.volume}
+            <div className="mt-1 text-sm tracking-wide text-foreground/70">
+              Об&apos;єм: {formatVolume(product.volume)}
             </div>
           )}
 

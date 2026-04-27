@@ -273,10 +273,6 @@ export default function CheckoutPage() {
           </div>
           <h1 className="mt-6 text-2xl font-bold text-accent sm:text-3xl">Дякуємо за замовлення!</h1>
           {orderId && <p className="mt-2 text-foreground/70">Замовлення №{orderId}</p>}
-          <p className="mt-6 leading-relaxed text-foreground">
-            Юлія звʼяжеться з вами найближчим часом для підтвердження.
-          </p>
-
           <motion.div
             className="mt-10 rounded-2xl border-2 border-accent bg-surface p-6 text-left"
             animate={{
@@ -288,16 +284,16 @@ export default function CheckoutPage() {
             }}
             transition={{ duration: 1.4, repeat: 3, ease: "easeInOut", delay: 0.4 }}
           >
-            <h2 className="font-serif text-xl">Оплата</h2>
+            <h2 className="text-xl font-semibold text-center">Оплата</h2>
             <p className="mt-3 text-sm text-foreground">
-              Оплатіть замовлення після отримання або переведіть на IBAN:
+              Відправка здійснюється лише після повної оплати на IBAN:
             </p>
             <div className="mt-3 rounded-xl bg-background px-4 py-3">
-              <p className="font-mono text-sm font-medium">UA12 3456 7890 1234 5678 9012 3456</p>
-              <p className="mt-1 text-xs text-foreground/70">Данільченко Юлія</p>
+              <p className="font-mono text-sm font-medium">UA663220010000026006350042115</p>
+              <p className="mt-1 text-sm text-foreground">Данільченко Юлія Юріївна</p>
             </div>
             <p className="mt-3 text-xs text-foreground/70">
-              У призначенні платежу вкажіть ваше ім'я та номер замовлення.
+              У призначенні платежу вкажіть ваше ім&apos;я та номер замовлення.
             </p>
           </motion.div>
 

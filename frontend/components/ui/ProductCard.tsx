@@ -15,6 +15,11 @@ const categoryLabels: Record<string, string> = {
   emotions: "Емоції",
 };
 
+function formatVolume(volume: string) {
+  const t = volume.trim();
+  return /мл$/i.test(t) || /ml$/i.test(t) ? t.replace(/мл$/i, "мл").replace(/ml$/i, "мл") : `${t} мл`;
+}
+
 function formatPrice(price: number) {
   return new Intl.NumberFormat("uk-UA", {
     style: "currency",
@@ -73,13 +78,13 @@ export function ProductCard({ product }: { product: ApiProduct }) {
         <div className="mt-auto flex items-end justify-between gap-2 pt-2 sm:pt-3">
           <div className="flex flex-col">
             {product.ph && (
-              <span className="text-[10px] text-foreground/70 uppercase tracking-wide">
+              <span className="text-[10px] text-foreground/70 tracking-wide">
                 pH {product.ph}
               </span>
             )}
             {product.volume && (
-              <span className="text-[10px] text-foreground/70 uppercase tracking-wide">
-                {product.volume}
+              <span className="text-[10px] text-foreground/70 tracking-wide">
+                {formatVolume(product.volume)}
               </span>
             )}
             <span className="text-sm font-bold text-foreground sm:text-base">
