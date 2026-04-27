@@ -53,7 +53,7 @@ export function Footer() {
             </li>
             <li>
               <a href="https://t.me/danilchenko_julia" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-                Telegram @danilchenko_julia
+                Telegram
               </a>
             </li>
             <li>
