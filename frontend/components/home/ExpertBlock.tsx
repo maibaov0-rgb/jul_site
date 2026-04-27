@@ -50,10 +50,10 @@ export function ExpertBlock() {
           <span className="text-[8px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted">
             Ваш експерт
           </span>
-          <h2 className="mt-1 text-lg sm:text-4xl md:text-5xl leading-tight font-normal">
+          <h2 className="mt-1 text-lg sm:text-4xl md:text-5xl leading-tight font-normal text-accent">
             Юлія Данільченко
           </h2>
-          <p className="mt-0.5 text-[9px] sm:text-sm uppercase tracking-wider text-accent font-medium">
+          <p className="mt-0.5 text-[9px] sm:text-sm uppercase tracking-wider text-foreground font-medium">
             Перукар-колорист
           </p>
 

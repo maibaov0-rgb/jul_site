@@ -41,19 +41,15 @@ export function Hero() {
 
           {/* Right: Text */}
           <div className="w-[57%] md:w-1/2 p-4 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-center bg-surface relative z-10 shrink-0">
-            <h2 className="mb-1 text-[9px] sm:text-xs md:text-sm font-semibold uppercase tracking-widest text-muted">
-              Ваш експерт
-            </h2>
-
-            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-foreground font-normal">
+            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-accent font-normal">
               Юлія Данільченко
             </h1>
 
-            <p className="mt-1 md:mt-3 text-[10px] sm:text-base md:text-lg font-medium text-accent">
+            <p className="mt-1 md:mt-2 text-[10px] sm:text-base md:text-lg font-medium text-foreground">
               Перукар-колорист
             </p>
 
-            <p className="mt-3 md:mt-8 text-[11px] sm:text-sm md:text-base leading-relaxed text-muted max-w-md">
+            <p className="mt-4 md:mt-10 text-[11px] sm:text-sm md:text-base leading-relaxed text-foreground max-w-md">
               Професійний догляд, фарбування та індивідуальні консультації. Обирайте найкраще для свого волосся разом з експертом.
             </p>
 
