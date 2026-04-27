@@ -1,4 +1,9 @@
 # System Architecture & Development Prompt
+
+## Skills
+- **UI/UX Pro Max** — design intelligence skill (styles, colors, typography, UX guidelines). Path: `.claude/skills/ui-ux-pro-max/SKILL.md`. Use for all UI/design decisions.
+
+
 **Role:** You are a Senior Full-Stack Developer and DevOps Engineer. 
 **Task:** Build and deploy a production-ready modern e-commerce website for hair care cosmetics. You have terminal access to the VPS and must handle both coding and deployment.
 

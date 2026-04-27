@@ -6,7 +6,10 @@
       "Bash(curl -sL \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/.claude/skills/design/SKILL.md\" -o ~/.claude/skills/design/SKILL.md)",
       "Bash(curl -sL \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/.claude/skills/slides/SKILL.md\" -o ~/.claude/skills/slides/SKILL.md)",
       "Bash(curl -sL \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/.claude/skills/ui-styling/SKILL.md\" -o ~/.claude/skills/ui-styling/SKILL.md)",
-      "Bash(curl -sL \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/.claude/skills/ui-ux-pro-max/SKILL.md\" -o ~/.claude/skills/ui-ux-pro-max/SKILL.md)"
+      "Bash(curl -sL \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/.claude/skills/ui-ux-pro-max/SKILL.md\" -o ~/.claude/skills/ui-ux-pro-max/SKILL.md)",
+      "Bash(npx prisma *)",
+      "Bash(npx tsc *)",
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?\\)$\")"
     ]
   }
 }

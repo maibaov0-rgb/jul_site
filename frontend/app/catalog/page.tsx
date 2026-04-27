@@ -12,6 +12,8 @@ const categories = [
   { value: "mask", label: "Маски" },
   { value: "leave-in", label: "Незмивний догляд" },
   { value: "other", label: "Інше" },
+  { value: "peeling-shampoo", label: "Пілінг шампуні" },
+  { value: "emotions", label: 'Лінійка "Емоції"' },
 ];
 
 const subtypes: Record<string, { value: string; label: string }[]> = {
