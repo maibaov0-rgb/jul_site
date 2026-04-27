@@ -29,7 +29,7 @@ export type ApiProduct = {
   volume?: string;
   ph?: string;
   imageUrls: string[];
-  tags: string[];
+  tags?: string[];
   featured: boolean;
   slug: string;
   createdAt: string;
