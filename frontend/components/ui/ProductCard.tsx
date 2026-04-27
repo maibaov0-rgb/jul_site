@@ -65,24 +65,24 @@ export function ProductCard({ product }: { product: ApiProduct }) {
       {/* Info */}
       <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
         <Link href={`/product/${product.slug}`}>
-          <h3 className="font-serif text-base leading-tight transition-colors group-hover:text-accent sm:text-xl line-clamp-2 min-h-[2.5rem] sm:min-h-[3.5rem]">
+          <h3 className="text-base font-semibold leading-tight text-foreground sm:text-lg line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
             {product.name}
           </h3>
         </Link>
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-2 sm:pt-3">
+        <div className="mt-auto flex items-end justify-between gap-2 pt-2 sm:pt-3">
           <div className="flex flex-col">
             {product.ph && (
-              <span className="text-[10px] text-muted uppercase tracking-wide">
+              <span className="text-[10px] text-foreground/70 uppercase tracking-wide">
                 pH {product.ph}
               </span>
             )}
             {product.volume && (
-              <span className="text-[10px] text-muted uppercase tracking-wide">
+              <span className="text-[10px] text-foreground/70 uppercase tracking-wide">
                 {product.volume}
               </span>
             )}
-            <span className="text-lg font-bold sm:text-2xl">
+            <span className="text-base font-bold text-foreground sm:text-lg">
               {formatPrice(product.price)}
             </span>
           </div>

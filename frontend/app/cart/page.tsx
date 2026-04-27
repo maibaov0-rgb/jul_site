@@ -77,7 +77,7 @@ export default function CartPage() {
                 <div className="flex items-start justify-between gap-2">
                   <Link
                     href={`/product/${item.product.slug}`}
-                    className="font-serif text-lg leading-snug hover:text-accent sm:text-xl"
+                    className="text-lg font-semibold leading-snug text-foreground hover:text-accent sm:text-xl"
                   >
                     {item.product.name}
                   </Link>
@@ -113,7 +113,7 @@ export default function CartPage() {
                     </button>
                   </div>
 
-                  <span className="font-serif text-xl">
+                  <span className="text-xl font-bold text-foreground">
                     {formatPrice(item.product.price * item.quantity)}
                   </span>
                 </div>
@@ -133,7 +133,7 @@ export default function CartPage() {
 
           <div className="mt-4 space-y-2 text-sm">
             {items.map((item) => (
-              <div key={item.product.id} className="flex justify-between text-muted">
+              <div key={item.product.id} className="flex justify-between text-foreground">
                 <span className="line-clamp-1 flex-1 pr-4">{item.product.name} × {item.quantity}</span>
                 <span className="shrink-0">{formatPrice(item.product.price * item.quantity)}</span>
               </div>
@@ -143,7 +143,7 @@ export default function CartPage() {
           <div className="mt-4 border-t border-border/60 pt-4">
             <div className="flex justify-between">
               <span className="font-medium">Разом</span>
-              <span className="font-serif text-2xl">{formatPrice(total())}</span>
+              <span className="text-2xl font-bold text-foreground">{formatPrice(total())}</span>
             </div>
             <p className="mt-1 text-xs text-muted">Без урахування доставки</p>
           </div>

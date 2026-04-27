@@ -272,8 +272,8 @@ export default function CheckoutPage() {
             <CheckIcon />
           </div>
           <h1 className="mt-6 text-2xl font-bold text-accent sm:text-3xl">Дякуємо за замовлення!</h1>
-          {orderId && <p className="mt-2 text-muted">Замовлення №{orderId}</p>}
-          <p className="mt-6 leading-relaxed text-muted">
+          {orderId && <p className="mt-2 text-foreground/70">Замовлення №{orderId}</p>}
+          <p className="mt-6 leading-relaxed text-foreground">
             Юлія звʼяжеться з вами найближчим часом для підтвердження.
           </p>
 
@@ -289,14 +289,14 @@ export default function CheckoutPage() {
             transition={{ duration: 1.4, repeat: 3, ease: "easeInOut", delay: 0.4 }}
           >
             <h2 className="font-serif text-xl">Оплата</h2>
-            <p className="mt-3 text-sm text-muted">
+            <p className="mt-3 text-sm text-foreground">
               Оплатіть замовлення після отримання або переведіть на IBAN:
             </p>
             <div className="mt-3 rounded-xl bg-background px-4 py-3">
               <p className="font-mono text-sm font-medium">UA12 3456 7890 1234 5678 9012 3456</p>
-              <p className="mt-1 text-xs text-muted">Данільченко Юлія</p>
+              <p className="mt-1 text-xs text-foreground/70">Данільченко Юлія</p>
             </div>
-            <p className="mt-3 text-xs text-muted">
+            <p className="mt-3 text-xs text-foreground/70">
               У призначенні платежу вкажіть ваше ім'я та номер замовлення.
             </p>
           </motion.div>
@@ -441,8 +441,8 @@ export default function CheckoutPage() {
                   )}
                 </div>
                 <div className="flex-1 text-sm">
-                  <p className="line-clamp-1 font-medium">{item.product.name}</p>
-                  <p className="text-muted">× {item.quantity}</p>
+                  <p className="line-clamp-1 font-medium text-foreground">{item.product.name}</p>
+                  <p className="text-foreground/60">× {item.quantity}</p>
                 </div>
                 <span className="text-sm font-medium">
                   {formatPrice(item.product.price * item.quantity)}
@@ -453,7 +453,7 @@ export default function CheckoutPage() {
           <div className="mt-4 border-t border-border/60 pt-4">
             <div className="flex justify-between">
               <span className="font-medium">Разом</span>
-              <span className="font-serif text-2xl">{formatPrice(total())}</span>
+              <span className="text-2xl font-bold text-foreground">{formatPrice(total())}</span>
             </div>
             <p className="mt-1 text-xs text-muted">Доставка оплачується окремо</p>
           </div>

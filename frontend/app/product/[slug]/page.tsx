@@ -145,12 +145,12 @@ export default function ProductPage() {
           </h1>
 
           {product.ph && (
-            <div className="mt-2 text-sm uppercase tracking-wide text-accent/80 font-medium">
+            <div className="mt-2 text-sm uppercase tracking-wide text-foreground/70">
               pH {product.ph}
             </div>
           )}
           {product.volume && (
-            <div className="mt-1 text-sm uppercase tracking-wide text-muted">
+            <div className="mt-1 text-sm uppercase tracking-wide text-foreground/70">
               Об'єм: {product.volume}
             </div>
           )}
@@ -160,7 +160,7 @@ export default function ProductPage() {
           </div>
 
           {product.description && (
-            <p className="mt-6 leading-relaxed text-muted">
+            <p className="mt-6 leading-relaxed text-foreground">
               {product.description}
             </p>
           )}
@@ -185,17 +185,17 @@ export default function ProductPage() {
             </Link>
           </div>
 
-          <div className="mt-8 border-t border-border/60 pt-6 space-y-2 text-sm text-muted">
+          <div className="mt-8 border-t border-border/60 pt-6 space-y-2 text-sm text-foreground">
             <div className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gold" />
+              <span className="h-1 w-1 rounded-full bg-accent" />
               Доставка Новою Поштою
             </div>
             <div className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gold" />
+              <span className="h-1 w-1 rounded-full bg-accent" />
               Оплата після отримання або на IBAN
             </div>
             <div className="flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gold" />
+              <span className="h-1 w-1 rounded-full bg-accent" />
               Консультація від Юлії Данільченко
             </div>
           </div>

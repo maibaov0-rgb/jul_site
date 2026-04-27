@@ -23,7 +23,7 @@
   --color-surface-alt: var(--surface-alt);
   --color-border: var(--border);
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
+  --font-serif: var(--font-inter);
 }
 
 html,
