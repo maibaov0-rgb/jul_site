@@ -10,7 +10,7 @@ const categoryLabels: Record<string, string> = {
   shampoo: "Шампунь",
   conditioner: "Кондиціонер",
   mask: "Маска",
-  "leave-in": "Незмивний догляд",
+  "leave-in": "Незмивні засоби",
   "peeling-shampoo": "Пілінг шампунь",
   emotions: "Емоції",
 };

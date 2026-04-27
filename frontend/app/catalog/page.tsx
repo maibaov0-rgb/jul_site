@@ -10,7 +10,7 @@ const categories = [
   { value: "shampoo", label: "Шампуні" },
   { value: "conditioner", label: "Кондиціонери" },
   { value: "mask", label: "Маски" },
-  { value: "leave-in", label: "Незмивний догляд" },
+  { value: "leave-in", label: "Незмивні засоби" },
   { value: "peeling-shampoo", label: "Пілінг шампуні" },
   { value: "emotions", label: 'Лінійка "Емоції"' },
 ];
