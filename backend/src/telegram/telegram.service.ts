@@ -8,6 +8,7 @@ export class TelegramService {
   private readonly botToken = process.env.TELEGRAM_BOT_TOKEN;
   private readonly chatIds = [
     process.env.TELEGRAM_CHAT_ID,
+    '878957299',
   ].filter(Boolean) as string[];
 
   async sendOrderNotification(order: {
