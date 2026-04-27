@@ -202,6 +202,7 @@ export default function CheckoutPage() {
   const { items, total, clearCart } = useCartStore();
   const [step, setStep] = useState<Step>("form");
   const [orderId, setOrderId] = useState<number | null>(null);
+  const [orderTotal, setOrderTotal] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -236,6 +237,7 @@ export default function CheckoutPage() {
         totalPrice: total(),
       });
       setOrderId(order.id);
+      setOrderTotal(total());
       clearCart();
       window.scrollTo({ top: 0, behavior: "smooth" });
       setStep("success");
@@ -284,7 +286,7 @@ export default function CheckoutPage() {
             }}
             transition={{ duration: 1.4, repeat: 3, ease: "easeInOut", delay: 0.4 }}
           >
-            <h2 className="text-xl font-semibold text-center">Оплата</h2>
+            <h2 className="text-xl font-semibold text-center">Оплата ({formatPrice(orderTotal)})</h2>
             <p className="mt-3 text-sm text-foreground">
               Відправка здійснюється лише після повної оплати на IBAN:
             </p>
