@@ -192,7 +192,7 @@ export default function ProductPage() {
             </div>
             <div className="flex items-center gap-2">
               <span className="h-1 w-1 rounded-full bg-accent" />
-              Оплата після отримання або на IBAN
+              Відправка після повної оплати на IBAN
             </div>
             <div className="flex items-center gap-2">
               <span className="h-1 w-1 rounded-full bg-accent" />

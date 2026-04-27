@@ -65,7 +65,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
       {/* Info */}
       <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
         <Link href={`/product/${product.slug}`}>
-          <h3 className="text-sm font-semibold leading-tight text-foreground sm:text-base line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+          <h3 className="text-sm font-semibold leading-tight text-foreground sm:text-base line-clamp-2">
             {product.name}
           </h3>
         </Link>
