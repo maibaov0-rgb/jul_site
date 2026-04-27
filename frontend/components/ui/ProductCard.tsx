@@ -74,6 +74,11 @@ export function ProductCard({ product }: { product: ApiProduct }) {
 
         <div className="mt-auto flex items-center justify-between gap-2 pt-2 sm:pt-3">
           <div className="flex flex-col">
+            {product.ph && (
+              <span className="text-[10px] text-accent/80 uppercase tracking-wide font-medium">
+                pH {product.ph}
+              </span>
+            )}
             {product.volume && (
               <span className="text-[10px] text-muted uppercase tracking-wide">
                 {product.volume}

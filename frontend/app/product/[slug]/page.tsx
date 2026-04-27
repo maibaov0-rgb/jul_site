@@ -142,8 +142,13 @@ export default function ProductPage() {
             {product.name}
           </h1>
 
+          {product.ph && (
+            <div className="mt-2 text-sm uppercase tracking-wide text-accent/80 font-medium">
+              pH {product.ph}
+            </div>
+          )}
           {product.volume && (
-            <div className="mt-2 text-sm uppercase tracking-wide text-muted">
+            <div className="mt-1 text-sm uppercase tracking-wide text-muted">
               Об'єм: {product.volume}
             </div>
           )}

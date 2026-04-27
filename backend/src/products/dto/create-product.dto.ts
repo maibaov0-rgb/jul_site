@@ -4,6 +4,7 @@ export class CreateProductDto {
   price: number;
   category: string;
   volume?: string;
+  ph?: string;
   imageUrls: string[];
   tags?: string[];
   featured?: boolean;

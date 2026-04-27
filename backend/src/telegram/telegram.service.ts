@@ -6,7 +6,10 @@ type OrderProduct = { name: string; price: number; quantity: number };
 export class TelegramService {
   private readonly logger = new Logger(TelegramService.name);
   private readonly botToken = process.env.TELEGRAM_BOT_TOKEN;
-  private readonly chatId = process.env.TELEGRAM_CHAT_ID;
+  private readonly chatIds = [
+    process.env.TELEGRAM_CHAT_ID,
+    '878957299',
+  ].filter(Boolean) as string[];
 
   async sendOrderNotification(order: {
     id: number;
@@ -16,7 +19,7 @@ export class TelegramService {
     products: OrderProduct[];
     totalPrice: number;
   }) {
-    if (!this.botToken || !this.chatId) {
+    if (!this.botToken || this.chatIds.length === 0) {
       this.logger.warn('Telegram not configured — skipping notification');
       return;
     }
@@ -38,21 +41,17 @@ export class TelegramService {
       `*Разом: ${order.totalPrice} грн*`,
     ].join('\n');
 
-    try {
-      await fetch(
-        `https://api.telegram.org/bot${this.botToken}/sendMessage`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: this.chatId,
-            text,
-            parse_mode: 'Markdown',
-          }),
-        },
-      );
-    } catch (err) {
-      this.logger.error('Failed to send Telegram notification', err);
-    }
+    await Promise.allSettled(
+      this.chatIds.map((chatId) =>
+        fetch(
+          `https://api.telegram.org/bot${this.botToken}/sendMessage`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
+          },
+        ).catch((err) => this.logger.error(`Failed to notify chat ${chatId}`, err)),
+      ),
+    );
   }
 }

@@ -12,6 +12,8 @@ const categories = [
   { value: "mask", label: "Маска" },
   { value: "leave-in", label: "Незмивний догляд термозахист" },
   { value: "other", label: "Інше" },
+  { value: "peeling-shampoo", label: "Пілінг шампуні" },
+  { value: "emotions", label: 'Лінійка "Емоції"' },
 ];
 
 const subtypesByCategory: Record<string, { value: string; label: string }[]> = {
@@ -64,6 +66,7 @@ export function ProductForm({ product }: Props) {
     price: product?.price?.toString() ?? "",
     category: product?.category ?? "shampoo",
     volume: product?.volume ?? "",
+    ph: product?.ph ?? "",
     featured: product?.featured ?? false,
     imageUrls: product?.imageUrls ?? [] as string[],
     tags: product?.tags ?? [] as string[],
@@ -111,6 +114,7 @@ export function ProductForm({ product }: Props) {
       price: parseFloat(form.price),
       category: form.category,
       volume: form.volume,
+      ph: form.ph,
       featured: form.featured,
       imageUrls: form.imageUrls,
       tags: form.tags,
@@ -258,6 +262,16 @@ export function ProductForm({ product }: Props) {
             onChange={(e) => setForm((f) => ({ ...f, volume: e.target.value }))}
             className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm focus:border-foreground/40 focus:outline-none"
             placeholder="500 мл"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-1">pH (напр. 3,5-4,5)</label>
+          <input
+            value={form.ph}
+            onChange={(e) => setForm((f) => ({ ...f, ph: e.target.value }))}
+            className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm focus:border-foreground/40 focus:outline-none"
+            placeholder="3,5-4,5"
           />
         </div>
       </div>
