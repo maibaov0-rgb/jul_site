@@ -9,9 +9,11 @@ import Link from "next/link";
 
 const categoryLabels: Record<string, string> = {
   shampoo: "Шампунь",
+  conditioner: "Кондиціонер",
   mask: "Маска",
-  gel: "Гель",
-  other: "Інше",
+  "leave-in": "Незмивний догляд",
+  "peeling-shampoo": "Пілінг шампунь",
+  emotions: "Емоції",
 };
 
 function formatPrice(price: number) {

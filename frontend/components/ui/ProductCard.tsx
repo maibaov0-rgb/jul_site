@@ -8,9 +8,11 @@ import { useCartStore } from "@/lib/store";
 
 const categoryLabels: Record<string, string> = {
   shampoo: "Шампунь",
+  conditioner: "Кондиціонер",
   mask: "Маска",
-  gel: "Гель",
-  other: "Інше",
+  "leave-in": "Незмивний догляд",
+  "peeling-shampoo": "Пілінг шампунь",
+  emotions: "Емоції",
 };
 
 function formatPrice(price: number) {
@@ -68,14 +70,10 @@ export function ProductCard({ product }: { product: ApiProduct }) {
           </h3>
         </Link>
 
-        <p className="line-clamp-2 text-sm text-muted min-h-[2.5rem]">
-          {product.description || "\u00A0"}
-        </p>
-
         <div className="mt-auto flex items-center justify-between gap-2 pt-2 sm:pt-3">
           <div className="flex flex-col">
             {product.ph && (
-              <span className="text-[10px] text-accent/80 uppercase tracking-wide font-medium">
+              <span className="text-[10px] text-muted uppercase tracking-wide">
                 pH {product.ph}
               </span>
             )}
@@ -84,7 +82,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
                 {product.volume}
               </span>
             )}
-            <span className="font-serif text-lg sm:text-2xl">
+            <span className="text-lg font-bold sm:text-2xl">
               {formatPrice(product.price)}
             </span>
           </div>

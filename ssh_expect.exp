@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 set timeout -1
-spawn ssh -o StrictHostKeyChecking=no maibaov@173.212.192.65 "cd jul-site && docker compose build && docker compose up -d"
+spawn ssh -o StrictHostKeyChecking=no maibaov@173.212.192.65 "cd jul-site && git pull && docker compose build && docker compose up -d"
 expect "*?assword:*"
 send "kaban159(%!\r"
 expect eof
