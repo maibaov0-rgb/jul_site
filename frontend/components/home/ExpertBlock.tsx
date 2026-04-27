@@ -50,7 +50,7 @@ export function ExpertBlock() {
           <span className="text-[8px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted">
             Ваш експерт
           </span>
-          <h2 className="mt-1 font-serif text-lg sm:text-4xl md:text-5xl leading-tight">
+          <h2 className="mt-1 text-lg sm:text-4xl md:text-5xl leading-tight font-normal">
             Юлія Данільченко
           </h2>
           <p className="mt-0.5 text-[9px] sm:text-sm uppercase tracking-wider text-accent font-medium">
@@ -83,7 +83,7 @@ export function ExpertBlock() {
           </dl>
 
           <div className="mt-4 sm:mt-8">
-            <LinkButton href="https://t.me/MaibaOV" variant="primary" className="w-full sm:w-auto text-[9px] sm:text-sm py-2 sm:py-3.5">
+            <LinkButton href="https://t.me/danilchenko_julia" variant="primary" className="w-full sm:w-auto text-[9px] sm:text-sm py-2 sm:py-3.5">
               Консультація
             </LinkButton>
           </div>

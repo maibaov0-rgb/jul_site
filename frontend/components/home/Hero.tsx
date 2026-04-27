@@ -45,7 +45,7 @@ export function Hero() {
               Ваш експерт
             </h2>
 
-            <h1 className="font-serif text-xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-foreground">
+            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-foreground font-normal">
               Юлія Данільченко
             </h1>
 
@@ -65,7 +65,7 @@ export function Hero() {
                 Перейти до каталогу
               </a>
               <a
-                href="https://t.me/MaibaOV"
+                href="https://t.me/danilchenko_julia"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center rounded-full border border-border px-3 py-2 sm:px-8 sm:py-3.5 text-[10px] sm:text-sm font-medium text-foreground transition-colors hover:bg-muted/10 hover:border-accent/40 text-center"

@@ -65,7 +65,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
       {/* Info */}
       <div className="flex flex-1 flex-col gap-2 p-3 sm:gap-3 sm:p-5">
         <Link href={`/product/${product.slug}`}>
-          <h3 className="text-base font-semibold leading-tight text-foreground sm:text-lg line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+          <h3 className="text-sm font-semibold leading-tight text-foreground sm:text-base line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
             {product.name}
           </h3>
         </Link>
@@ -82,14 +82,14 @@ export function ProductCard({ product }: { product: ApiProduct }) {
                 {product.volume}
               </span>
             )}
-            <span className="text-base font-bold text-foreground sm:text-lg">
+            <span className="text-sm font-bold text-foreground sm:text-base">
               {formatPrice(product.price)}
             </span>
           </div>
           <button
             type="button"
             onClick={handleAddToCart}
-            className={`min-h-[44px] rounded-full px-3 py-2 text-xs transition-all sm:px-4 sm:text-sm ${
+            className={`shrink-0 whitespace-nowrap min-h-[44px] rounded-full px-3 py-2 text-xs transition-all sm:px-4 sm:text-sm ${
               added
                 ? "bg-green-600 text-white"
                 : "bg-accent text-white hover:scale-[1.03] hover:bg-accent/90 active:scale-[0.97]"
