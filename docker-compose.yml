@@ -33,10 +33,10 @@ services:
     build:
       context: ./frontend
       args:
-        NEXT_PUBLIC_API_URL: http://173.212.192.65:4000
+        NEXT_PUBLIC_API_URL: https://hairchemylab.com.ua/api
     restart: always
     environment:
-      NEXT_PUBLIC_API_URL: http://173.212.192.65:4000
+      NEXT_PUBLIC_API_URL: https://hairchemylab.com.ua/api
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     ports:
       - "3000:3000"
