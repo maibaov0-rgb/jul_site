@@ -3,18 +3,52 @@
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 
-const TEXT =
-  "Професійний догляд, фарбування та індивідуальні консультації. Обирайте найкраще для свого волосся разом з експертом.";
+const TEXT1 =
+  "Це синергія науки та мистецтва в догляді за волоссям. Український бренд створює продукти за трирівневою архітектурою, що працюють на зміцнення структури, підтримку ліпідного шару та захист поверхні волосся.";
+
+const CHAR_DELAY = 0.01;
+const TITLE_DELAY = 0.1;
+const TEXT1_DELAY = TITLE_DELAY + 0.4;
+const BUTTONS_DELAY = TEXT1_DELAY + TEXT1.length * CHAR_DELAY + 0.2;
 
 const charVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
 };
 
-const buttonVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
+
+const buttonVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.5 } },
+};
+
+function TypewriterText({
+  text,
+  delay,
+  className,
+}: {
+  text: string;
+  delay: number;
+  className?: string;
+}) {
+  const variants: Variants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: CHAR_DELAY, delayChildren: delay } },
+  };
+  return (
+    <motion.p className={className} variants={variants} initial="hidden" animate="visible">
+      {text.split("").map((char, i) => (
+        <motion.span key={i} variants={charVariants}>
+          {char}
+        </motion.span>
+      ))}
+    </motion.p>
+  );
+}
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,26 +60,10 @@ export function Hero() {
 
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
-  const textContainerVariants: Variants = {
+  const buttonsVariants: Variants = {
     hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.018,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const buttonsContainerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.18,
-        delayChildren: TEXT.length * 0.018 + 0.1,
-      },
-    },
+    visible: { transition: { staggerChildren: 0.18, delayChildren: BUTTONS_DELAY } },
   };
 
   return (
@@ -54,30 +72,33 @@ export function Hero() {
       className="relative mx-auto w-full max-w-6xl px-4 py-6 sm:px-8 sm:py-12 md:py-20 lg:py-24"
     >
       <motion.div
-        style={{ opacity, scale, y }}
+        style={{ opacity, scale }}
         className="relative flex flex-row overflow-hidden rounded-3xl md:rounded-[2rem] bg-surface shadow-2xl shadow-foreground/5 border border-border/50 min-h-[320px] md:min-h-[600px]"
       >
         {/* Left: Text Content */}
-        <div className="w-1/2 p-4 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-center bg-[#f7f1fb] relative z-10">
+        <div className="w-1/2 p-4 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-center bg-[#f7f1fb] relative z-10 gap-3 md:gap-5">
 
-          {/* Typewriter text */}
-          <motion.p
-            className="text-[11px] sm:text-sm md:text-base leading-relaxed text-foreground/70 max-w-md"
-            variants={textContainerVariants}
+          {/* Brand title */}
+          <motion.h1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight font-normal text-accent"
+            variants={titleVariants}
             initial="hidden"
             animate="visible"
+            transition={{ delay: TITLE_DELAY }}
           >
-            {TEXT.split("").map((char, i) => (
-              <motion.span key={i} variants={charVariants}>
-                {char}
-              </motion.span>
-            ))}
-          </motion.p>
+            Na Gólov[y]
+          </motion.h1>
 
-          {/* Buttons — appear after text finishes */}
+          {/* Typewriter paragraphs */}
+          <TypewriterText
+            text={TEXT1}
+            delay={TEXT1_DELAY}
+            className="text-[11px] sm:text-sm md:text-base leading-relaxed text-foreground/70"
+          />
+          {/* Buttons */}
           <motion.div
-            className="mt-4 md:mt-10 flex flex-col xl:flex-row gap-2 sm:gap-3 w-full xl:w-auto"
-            variants={buttonsContainerVariants}
+            className="mt-2 md:mt-4 flex flex-col xl:flex-row gap-2 sm:gap-3 w-full xl:w-auto"
+            variants={buttonsVariants}
             initial="hidden"
             animate="visible"
           >

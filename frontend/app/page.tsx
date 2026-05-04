@@ -1,7 +1,6 @@
 "use client";
 
 import { Hero } from "@/components/home/Hero";
-import { BrandPhilosophy } from "@/components/home/BrandPhilosophy";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { BlogPreview } from "@/components/home/BlogPreview";
 
@@ -11,7 +10,6 @@ export default function Home() {
       <div className="bg-background">
         <Hero />
       </div>
-      <BrandPhilosophy />
 
       <div className="bg-background">
         <FeaturedProducts />
