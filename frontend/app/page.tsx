@@ -11,7 +11,7 @@ export default function Home() {
         <Hero />
       </div>
 
-      <div className="bg-background">
+      <div className="bg-[#f7f1fb]">
         <FeaturedProducts />
       </div>
 

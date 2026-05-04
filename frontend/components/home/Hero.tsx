@@ -6,44 +6,37 @@ import { useRef } from "react";
 const TEXT1 =
   "Це синергія науки та мистецтва в догляді за волоссям. Український бренд створює продукти за трирівневою архітектурою, що працюють на зміцнення структури, підтримку ліпідного шару та захист поверхні волосся.";
 
-const CHAR_DELAY = 0.01;
+const WORDS = TEXT1.split(" ");
+const WORD_STAGGER = 0.055;
 const TITLE_DELAY = 0.1;
-const TEXT1_DELAY = TITLE_DELAY + 0.4;
-const BUTTONS_DELAY = TEXT1_DELAY + TEXT1.length * CHAR_DELAY + 0.2;
+const TEXT_DELAY = TITLE_DELAY + 0.35;
+const BUTTONS_DELAY = TEXT_DELAY + WORDS.length * WORD_STAGGER + 0.15;
 
-const charVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
+const wordVariants: Variants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25 } },
 };
 
 const titleVariants: Variants = {
   hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
 const buttonVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.5 } },
+  visible: { opacity: 1, transition: { duration: 0.45 } },
 };
 
-function TypewriterText({
-  text,
-  delay,
-  className,
-}: {
-  text: string;
-  delay: number;
-  className?: string;
-}) {
+function WordRevealText({ className }: { className?: string }) {
   const variants: Variants = {
     hidden: {},
-    visible: { transition: { staggerChildren: CHAR_DELAY, delayChildren: delay } },
+    visible: { transition: { staggerChildren: WORD_STAGGER, delayChildren: TEXT_DELAY } },
   };
   return (
     <motion.p className={className} variants={variants} initial="hidden" animate="visible">
-      {text.split("").map((char, i) => (
-        <motion.span key={i} variants={charVariants}>
-          {char}
+      {WORDS.map((word, i) => (
+        <motion.span key={i} variants={wordVariants} style={{ display: "inline-block", marginRight: "0.25em" }}>
+          {word}
         </motion.span>
       ))}
     </motion.p>
@@ -89,12 +82,7 @@ export function Hero() {
             Na Gólov[y]
           </motion.h1>
 
-          {/* Typewriter paragraphs */}
-          <TypewriterText
-            text={TEXT1}
-            delay={TEXT1_DELAY}
-            className="text-[11px] sm:text-sm md:text-base leading-relaxed text-foreground/70"
-          />
+          <WordRevealText className="text-[11px] sm:text-sm md:text-base leading-relaxed text-foreground/70" />
           {/* Buttons */}
           <motion.div
             className="mt-2 md:mt-4 flex flex-col xl:flex-row gap-2 sm:gap-3 w-full xl:w-auto"
